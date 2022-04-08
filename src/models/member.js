@@ -2,9 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const uniqueValidator = require("mongoose-unique-validator");
 
-const schema = mongoose.Schema;
-
-const memberSchema = new Schema({
+const memberSchema = new mongoose.Schema({
   name: {
     first: { type: String, required: true, trim: true },
     last: { type: String, trim: true },
