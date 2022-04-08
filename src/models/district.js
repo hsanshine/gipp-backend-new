@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
-const groupSchema = new mongoose.Schema({
-  leader: { type: mongoose.Types.ObjectId, ref: "Leader" },
-  members: [{ type: mongoose.Types.ObjectId, ref: "Member" }],
-  reports: [{ type: mongoose.Types.ObjectId, ref: "Report" }],
-  formerMembers: [{ type: mongoose.Types.ObjectId, ref: "Member" }],
+const districtSchema = new mongoose.Schema({
+  leader: {
+    type: mongoose.Types.ObjectId,
+    ref: "DistrictLeader",
+  },
+  groups: [{ type: mongoose.Types.ObjectId, ref: "Group" }],
   startDate: { type: Date },
   status: { isActive: { type: Boolean }, endDate: { type: Date } },
-  attendance: [{ type: Number }],
 });
 
 // groupSchema.plugin(uniqueValidator);
-module.exports = mongoose.model("Group", groupSchema);
+module.exports = mongoose.model("Group", districtSchema);
 
 //the number of meetings can be got from the number of reports submitted..
 //meetings dates are also the dates got from the reports

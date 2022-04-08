@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const uniqueValidator = require("mongoose-unique-validator");
-const schema = mongoose.Schema;
 
 const extendSchema = require("../utils/extendSchema");
 const memberSchema = require("./member");
 
-const leaderSchema = extendSchema(memberSchema, {
+const leaderSchema = mongoose.Schema({
   name: {
     first: { type: String, required: true, trim: true },
     last: { type: String, required: true, trim: true },
@@ -18,9 +17,11 @@ const leaderSchema = extendSchema(memberSchema, {
     lowercase: true,
     unique: true,
     required: "Email address of leader is required",
+    lowercase: true,
     validate: [validator.isEmail, "Please fill a valid email address"],
   },
   nationality: { type: String, required: true, trim: true },
+
   picture: { type: String },
 });
 
@@ -44,5 +45,6 @@ const leaderSchema = extendSchema(memberSchema, {
 
 leaderSchema.plugin(uniqueValidator);
 //TODO: will add a picture later
+//TODO: add a get for the full name
 
-module.exports = mongoose.model("Pastor", pastorSchema);
+module.exports = mongoose.model("Leader", leaderSchema);
