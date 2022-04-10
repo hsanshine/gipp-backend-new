@@ -10,7 +10,7 @@ var router = express.Router();
 
 /**
  * @swagger
- * /:
+ * /testing:
  *  get:
  *    summary: I am using this to test my api.
  *    tags: [Testing]
@@ -22,7 +22,7 @@ var router = express.Router();
  *              schema:
  *                type: string
  */
-router.get("/", (req, res, next) => {
+router.get("/testing", (req, res, next) => {
   res.status(200).json({ msg: "you have reached GIPP" });
 });
 
