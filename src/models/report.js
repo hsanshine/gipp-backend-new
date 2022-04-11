@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
 const reportSchema = new mongoose.Schema({
-  group: { type: mongoose.Types.ObjectId, ref: "Group" },
+  group: { type: mongoose.Types.ObjectId, ref: "Group", required: true },
   date: { type: Date },
   membersPresent: [{ type: mongoose.Types.ObjectId, ref: "Member" }],
   membersAbsent: [{ type: mongoose.Types.ObjectId, ref: "Member" }],
-  meetingSummary: { type: String },
+  meetingSummary: { type: String, reqiured: true },
   meetingType: { type: String, enum: ["offline", "online", "hybrid"] },
   prayerRequests: [{ type: mongoose.Types.ObjectId, ref: "PrayerRequest" }],
   miscellenous: { type: String },

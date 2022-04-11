@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 const Leader = require("./leader");
 
-const Pastor = Leader.discriminator(
+const GroupLeader = Leader.discriminator(
   "GroupLeader",
   new mongoose.Schema(
     {
-      church: { type: mongoose.Types.ObjectId, required: true, ref: "Church" },
+      group: { type: mongoose.Types.ObjectId, required: true },
     },
     { discriminatorKey: "kind" }
   )
 );
 
-module.exports = Pastor;
+module.exports = GroupLeader;
