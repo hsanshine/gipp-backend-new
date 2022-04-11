@@ -5,11 +5,15 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/app.js"
+    "start": "nodemon --exec babel-node ./src/app.js"
   },
   "author": "Hamza Kyamanywa",
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
@@ -17,6 +21,8 @@
     "mongoose-unique-validator": "^3.0.0",
     "moongoose": "^0.0.5",
     "morgan": "^1.10.0",
+    "swagger-jsdoc": "^6.2.0",
+    "swagger-ui-express": "^4.3.0",
     "validator": "^13.7.0"
   },
   "devDependencies": {
