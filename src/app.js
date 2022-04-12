@@ -8,8 +8,9 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
-const indexRouter = require("./routes/index"); //default
+const indexRouter = require("./routes/index-routes"); //default
 const usersRouter = require("./routes/users");
+const orgRouter = require("./routes/org-routes");
 
 // const dbObject = require("./database/database");
 const envVars = require("../config");
