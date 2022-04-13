@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
-const prayerRequestSchema = new mongoose.Schema({
+const requestSchema = new mongoose.Schema({
   group: { type: mongoose.Types.ObjectId, ref: "Group", required: true },
   date: { type: Date, required: true },
-  request: { type: String, reqiured: true },
+  requestData: { type: String, reqiured: true },
   reviewed: {
-    person: { type: mongoose.Types.ObjectId, ref: "Pastor" },
+    person: { type: mongoose.Types.ObjectId, ref: "Admin" },
     date: { type: Date },
   },
 });
 
-module.exports = mongoose.model("PrayerRequest", prayerRequestSchema);
+module.exports = mongoose.model("Request", requestSchema);

@@ -9,8 +9,10 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index-routes"); //default
-const usersRouter = require("./routes/users");
 const orgRouter = require("./routes/org-routes");
+const districtRouter = require("./routes/district-routes");
+const groupRouter = require("./routes/group-routes");
+const leaderRouter = require("./routes/leader-routes");
 
 // const dbObject = require("./database/database");
 const envVars = require("../config");

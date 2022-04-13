@@ -8,10 +8,10 @@ const reportSchema = new mongoose.Schema({
   membersAbsent: [{ type: mongoose.Types.ObjectId, ref: "Member" }],
   meetingSummary: { type: String, reqiured: true },
   meetingType: { type: String, enum: ["offline", "online", "hybrid"] },
-  prayerRequests: [{ type: mongoose.Types.ObjectId, ref: "PrayerRequest" }],
+  requests: [{ type: mongoose.Types.ObjectId, ref: "Request" }],
   miscellenous: { type: String },
   reviewed: {
-    person: { type: mongoose.Types.ObjectId, ref: "Pastor" },
+    person: { type: mongoose.Types.ObjectId, ref: "Admin" },
     date: { type: Date },
   },
 });

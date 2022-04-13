@@ -1,10 +1,8 @@
 import express from "express";
 
 import { check } from "express-validator";
-import res from "express/lib/response";
-import router, { route } from "./index-routes";
 
-const routers = express.Router();
+const router = express.Router();
 /**
  * @swagger
  * components:
@@ -36,7 +34,7 @@ const routers = express.Router();
  * @swagger
  * tags:
  *  name: Organization
- *  description: API for the organization entity entity
+ *  description: API for the organization entity
  */
 /**
  * @swagger
@@ -66,7 +64,7 @@ router.post("/org", (req, res, next) => {
 });
 /**
  * @swagger
- * /org/{orgId}:
+ * /{orgId}:
  *   get:
  *     summary: Gets data about the organization
  *     tags: [Organization]
@@ -87,13 +85,13 @@ router.post("/org", (req, res, next) => {
  *       404:
  *         description: No matching organization found
  */
-router.get("/org/:orgId", (req, res, next) => {
+router.get("/:orgId", (req, res, next) => {
   res.status(200).json({ msg: "you get the org information" });
 });
 
 /**
  * @swagger
- * /org/{orgId}/approvals:
+ * /{orgId}/approvals:
  *   get:
  *     summary: Returns all pending approvals
  *     tags: [Organization]
@@ -108,13 +106,14 @@ router.get("/org/:orgId", (req, res, next) => {
  *                 $ref: '#/components/schemas/Organization'
  */
 
-router.get("/org/:orgId/approvals", (req, res, next) => {
+router.get("/:orgId/approvals", (req, res, next) => {
+  //we can have a paramater for status=pending or status=approvedByUser or status=approvedByOthers
   res.status(200).json({ msg: "you get the pending approvals" });
 });
 
 /**
  * @swagger
- * /org/{orgId}/approvals/history:
+ * /{orgId}/approvals/history:
  *   get:
  *     summary: gets all previously done approvals and the person that did them
  *     tags: [Organization]
@@ -135,14 +134,14 @@ router.get("/org/:orgId/approvals", (req, res, next) => {
  *       404:
  *         description: No previous approvals by organization
  */
-router.get("/org/:orgId/approvals/history", (req, res, next) => {
+router.get("/:orgId/approvals/history", (req, res, next) => {
   res
     .status(200)
     .json({ msg: "you get all previously done approvals and who did them" });
 });
 /**
  * @swagger
- * /org/{orgId}/approvals/{leaderId}:
+ * /{orgId}/approvals/{leaderId}:
  *  patch:
  *     summary: Used to approve a leader for the organization.
  *     tags: [Organization]
@@ -172,21 +171,52 @@ router.get("/org/:orgId/approvals/history", (req, res, next) => {
  *       500:
  *         description: There was a server error
  */
-router.patch("org/:orgId/approvals/:leaderId", (req, res, next) => {
+router.patch("/:orgId/approvals/:leaderId", (req, res, next) => {
   //the body has the leader you are approving and whether you said yes or no
   console.log(req.body);
   res.status(200).json({
     msg: "you will have to say whether you approve the subject or not",
   });
 });
-
-router.patch("/org/:orgId/leaders/:leaderId", (req, res, next) => {
+/**
+ * @swagger
+ * /{orgId}/leaders/{leaderId}:
+ *  patch:
+ *     summary: Used to approve a leader for the organization
+ *     tags: [Organization]
+ *     parameters:
+ *        -in : path
+ *        name: leaderId
+ *        schema:
+ *           type: String
+ *           required: true
+ *           description: id of leader to be updated
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               leaderId:
+ *                 type: string
+ *               adminUserId:
+ *                 type: string
+ *               isApproved:
+ *                 type: boolean
+ *     responses:
+ *       201:
+ *         description: Successfully approved or not
+ *       500:
+ *         description: There was a server error
+ */
+router.patch("/:orgId/leaders/:leaderId", (req, res, next) => {
   res.status(204).json({ msg: "the leader has successfully been updated" });
 });
 /**
  * @swagger
- *  /org/{orgId}/leaders/{leaderId}:
- *    delete:
+ * /{orgId}/leaders/{leaderId}:
+ *  delete:
  *      summary: Deletes an exiting leader
  *      tags: [Organization]
  *      parameters:
@@ -203,12 +233,12 @@ router.patch("/org/:orgId/leaders/:leaderId", (req, res, next) => {
  *          description: The leader was not found
  *
  */
-router.delete("/org/:orgId/leaders/:leaderId", (req, res, next) => {
+router.delete("/:orgId/leaders/:leaderId", (req, res, next) => {
   res.status(202).json({ msg: "the leader has been deleted" });
 });
 /**
  * @swagger
- * /org/{orgId}/reports:
+ * /{orgId}/reports:
  *   get:
  *     summary: Returns all organization reports
  *     tags: [Organization]
@@ -231,11 +261,11 @@ router.delete("/org/:orgId/leaders/:leaderId", (req, res, next) => {
  *       404:
  *          description: Matching organization not found
  */
-router.get("/org/:orgId/reports", () => {}); //maybe should have option to ask for group/district reports
+router.get("/:orgId/reports", () => {}); //maybe should have option to ask for group/district reports
 
 /**
  * @swagger
- * /org/{orgId}/requests:
+ * /{orgId}/requests:
  *   get:
  *     summary: Returns all organization requests
  *     tags: [Organization]
@@ -258,17 +288,17 @@ router.get("/org/:orgId/reports", () => {}); //maybe should have option to ask f
  *       404:
  *          description: Matching organization not found
  */
-router.get("/org/:orgId/requests", () => {});
+router.get("/:orgId/requests", () => {});
 
 /**
  * @swagger
- * /org/{orgId}/districts:
+ * /{orgId}/districts:
  *   get:
  *     summary: Returns all organization districts
  *     tags: [Organization]
  *     responses:
  *       200:
- *         description: Lists all organization requests
+ *         description: Lists all organization districts
  *         content:
  *           application/json:
  *             schema:
@@ -278,7 +308,45 @@ router.get("/org/:orgId/requests", () => {});
  *       404:
  *          description: Matching organization not found
  */
-router.get("/org/:orgId/districts", () => {});
+router.get("/:orgId/districts", () => {});
+/**
+ * @swagger
+ * /{orgId}/groups:
+ *   get:
+ *     summary: Returns all organization groups
+ *     tags: [Organization]
+ *     responses:
+ *       200:
+ *         description: Lists all organization groups
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Organization'
+ *       404:
+ *          description: Matching organization not found
+ */
+router.get("/:orgId/groups", () => {});
 
-router.get;
+/**
+ * @swagger
+ * /{orgId}/rates:
+ *   get:
+ *     summary: Returns all organization rates
+ *     tags: [Organization]
+ *     responses:
+ *       200:
+ *         description: Returns organization rates over the different districts
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Organization'
+ *       404:
+ *          description: Matching organization not found
+ */
+router.get("/:orgId/rates", () => {});
+
 module.exports = router;
