@@ -3,6 +3,8 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 const groupSchema = new mongoose.Schema({
   leader: { type: mongoose.Types.ObjectId, ref: "Leader" },
+  district: { type: mongoose.Types.ObjectId, ref: "District" },
+  organization: { type: mongoose.Types.ObjectId, ref: "Organization" },
   members: [{ type: mongoose.Types.ObjectId, ref: "Member" }],
   reports: [{ type: mongoose.Types.ObjectId, ref: "Report" }],
   formerMembers: [{ type: mongoose.Types.ObjectId, ref: "Member" }],
