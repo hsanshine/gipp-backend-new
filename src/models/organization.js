@@ -10,6 +10,6 @@ const organizationSchema = new mongoose.Schema({
   resources: [{ type: String }],
 });
 
-churchSchema.plugin(uniqueValidator);
+organizationSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model("Organization", organizationSchema);

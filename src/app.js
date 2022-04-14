@@ -74,6 +74,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
 
 app.use("/api", indexRouter);
+app.use("/api", orgRouter);
+app.use("/api", leaderRouter);
+app.use("/api", districtRouter);
+app.use("/api", groupRouter);
+
 // app.use("/api/users", usersRouter);
 
 // catch 404 and forward to error handler
