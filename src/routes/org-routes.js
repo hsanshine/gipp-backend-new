@@ -38,7 +38,7 @@ const router = express.Router();
  */
 /**
  * @swagger
- * /org:
+ * /register:
  *  post:
  *     summary: Creates a new organization.
  *     tags: [Organization]
@@ -59,7 +59,7 @@ const router = express.Router();
  *       500:
  *         description: There was a server error
  */
-router.post("/org", (req, res, next) => {
+router.post("/register", (req, res, next) => {
   res.status(201).json({ msg: "you have registered a new organization" });
 });
 /**
@@ -85,9 +85,9 @@ router.post("/org", (req, res, next) => {
  *       404:
  *         description: No matching organization found
  */
-router.get("/:orgId", (req, res, next) => {
-  res.status(200).json({ msg: "you get the org information" });
-});
+// router.get("/:orgId", (req, res, next) => {
+//   res.status(200).json({ msg: "you get the org information" });
+// });
 
 /**
  * @swagger

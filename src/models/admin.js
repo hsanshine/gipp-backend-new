@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Leader = require("./leader");
 
 const Admin = Leader.discriminator(
-  "GroupLeader",
+  "Leader",
   new mongoose.Schema(
     {
       organization: {

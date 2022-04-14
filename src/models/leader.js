@@ -6,11 +6,9 @@ const extendSchema = require("../utils/extendSchema");
 const memberSchema = require("./member");
 
 const leaderSchema = mongoose.Schema({
-  name: {
-    first: { type: String, required: true, trim: true },
-    last: { type: String, required: true, trim: true },
-  },
-  birthDate: { type: Date, required: true },
+  firstName: { type: String, required: true, trim: true },
+  lastName: { type: String, required: true, trim: true },
+  birthDate: { type: Date },
   email: {
     type: String,
     trim: true,
@@ -20,7 +18,8 @@ const leaderSchema = mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, "Please fill a valid email address"],
   },
-  nationality: { type: String, required: true, trim: true },
+  password: { type: String, required: true },
+  nationality: { type: String, trim: true },
 
   picture: { type: String },
 });
